@@ -43,8 +43,21 @@ async function updateProfile(userId, { name, profile_image }) {
     return { message: "Profile updated successfully" };
 }
 
+/**
+ * 🔔 Save device token (PUSH NOTIFICATIONS)
+ */
+async function saveDeviceToken(userId, deviceToken) {
+    await db.query(
+        "UPDATE users SET device_token = ? WHERE id = ?",
+        [deviceToken, userId]
+    );
+
+    return true;
+}
+
 module.exports = {
     getProfile,
     getAllUsers,
     updateProfile,
+    saveDeviceToken
 };

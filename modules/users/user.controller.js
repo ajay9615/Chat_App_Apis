@@ -45,8 +45,29 @@ async function update(req, res) {
     }
 }
 
+/**
+ * POST /users/device-token
+ */
+async function saveDeviceToken(req, res) {
+    try {
+        const userId = req.user.id;
+        const { deviceToken } = req.body;
+
+        if (!deviceToken) {
+            return res.status(400).json({ message: "Device token required" });
+        }
+
+        await userService.saveDeviceToken(userId, deviceToken);
+
+        return res.json({ success: true });
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+}
+
 module.exports = {
     profile,
     listUsers,
     update,
+    saveDeviceToken
 };
