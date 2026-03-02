@@ -15,5 +15,5 @@ server.on("upgrade", (req, socket, head) => {
 const PORT = process.env.PORT || 8080;
 
 server.listen(PORT, () => {
-    console.log(`🚀 REST + WebSocket server running on port ${PORT}`);
+    console.log(`REST + WebSocket server running on port ${PORT}`);
 });

@@ -1,6 +1,5 @@
 /**
- * userId -> WebSocket instance
- * One user = one active socket (simple version)
+ * userId -> WebSocket
  */
 const onlineUsers = new Map();
 
@@ -20,9 +19,16 @@ function getAllOnlineUsers() {
     return [...onlineUsers.keys()];
 }
 
+function broadcast(payload) {
+    onlineUsers.forEach((ws) => {
+        ws.send(JSON.stringify(payload));
+    });
+}
+
 module.exports = {
     addUser,
     removeUser,
     getUserSocket,
     getAllOnlineUsers,
+    broadcast,
 };

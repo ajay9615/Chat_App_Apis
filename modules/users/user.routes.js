@@ -35,4 +35,9 @@ router.get("/", authMiddleware, userController.listUsers);
 // Update profile
 router.put("/profile", authMiddleware, userController.update);
 
+router.post(
+    "/device-token",
+    authMiddleware,
+    userController.saveDeviceToken
+);
 module.exports = router;
